@@ -1,6 +1,6 @@
 package com.mamba.application.entity;
 
-import com.jztey.framework.mvc.Id;
+import com.mamba.framework.mvc.Id;
 
 //@Entity
 //@Table(name = "")

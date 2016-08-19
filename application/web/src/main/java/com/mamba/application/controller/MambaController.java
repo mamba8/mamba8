@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jztey.framework.mvc.RestfulResult;
 import com.mamba.application.service.MambaServiceImpl;
+import com.mamba.framework.mvc.RestfulResult;
 
 @RestController
 @RequestMapping("/api/mamba")
