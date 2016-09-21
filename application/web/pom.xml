@@ -11,11 +11,14 @@
 
     <artifactId>application-web</artifactId>
     <packaging>war</packaging>
+    
+    
     <dependencies>
         <dependency>
             <groupId>com.mamba8</groupId>
             <artifactId>framework</artifactId>
         </dependency>
+        
 
         <!--lib-->
         <dependency>

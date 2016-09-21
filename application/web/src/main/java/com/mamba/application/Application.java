@@ -11,8 +11,13 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.mamba.framework.boot.ApplicationDruid;
+import com.mamba.framework.boot.ApplicationMonitoring;
+
 @SpringBootApplication
-@Import({ ApplicationScheduling.class })
+@Import({ ApplicationScheduling.class 
+    , ApplicationMonitoring.class
+    ,ApplicationDruid.class})
 public class Application extends SpringBootServletInitializer {
 	@Bean
 	public WebMvcConfigurer corsConfigurer() { // 允许跨域

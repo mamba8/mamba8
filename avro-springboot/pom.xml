@@ -35,9 +35,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
 		<dependency>
-		  <groupId>org.apache.avro</groupId>
-		  <artifactId>avro</artifactId>
-		  <version>1.8.1</version>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro-ipc</artifactId>
+			<version>1.8.1</version>
 		</dependency>
 	</dependencies>
 
@@ -51,49 +56,93 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
+			<!-- 
+		This plugin element causes the Avro Maven Plugin’s compile goal to run during the “generate-sources” maven phase.
+         -->    
+            <plugin>
+			  <groupId>org.apache.avro</groupId>
+			  <artifactId>avro-maven-plugin</artifactId>
+			  <version>1.7.7</version>
+			  <executions>
+			    <execution>
+			      <phase>generate-sources</phase>
+			      <goals>
+			        <goal>schema</goal>
+			      </goals>
+			      <configuration>
+			        <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+			        <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+			      </configuration>
+			    </execution>
+			  </executions>
+			</plugin>
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-compiler-plugin</artifactId>
+			  <configuration>
+			    <source>1.6</source>
+			    <target>1.6</target>
+			  </configuration>
+			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.avro
+										</groupId>
+										<artifactId>
+											avro-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.7.7,)
+										</versionRange>
+										<goals>
+											<goal>schema</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
-	<!-- <repositories>
+	<!-- <repositories> <repository> <id>nexus</id> <name>local private nexus</name> 
+		<url>http://maven.oschina.net/content/groups/public/</url> <releases> <enabled>true</enabled> 
+		</releases> <snapshots> <enabled>false</enabled> </snapshots> </repository> 
+		</repositories> <pluginRepositories> <pluginRepository> <id>nexus</id> <name>local 
+		private nexus</name> <url>http://maven.oschina.net/content/groups/public/</url> 
+		<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
+		</snapshots> </pluginRepository> </pluginRepositories> -->
+
+
+	<repositories>
 		<repository>
 			<id>nexus</id>
-			<name>local private nexus</name>
-			<url>http://maven.oschina.net/content/groups/public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
+			<name>Team Nexus Repository</name>
+			<url>http://nexus.yyjzt.com:8080/nexus-2.1.2/content/groups/public/</url>
 			<snapshots>
-				<enabled>false</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+				<enabled>true</enabled>
+				<updatePolicy>interval:10</updatePolicy>
 			</snapshots>
 		</repository>
 	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>nexus</id>
-			<name>local private nexus</name>
-			<url>http://maven.oschina.net/content/groups/public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories> -->
-	
-	
-    <repositories>
-        <repository>
-            <id>nexus</id>
-            <name>Team Nexus Repository</name>
-            <url>http://nexus.yyjzt.com:8080/nexus-2.1.2/content/groups/public/</url>
-            <snapshots>
-                <checksumPolicy>warn</checksumPolicy>
-                <enabled>true</enabled>
-                <updatePolicy>interval:10</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
 
-	
+
 </project>
